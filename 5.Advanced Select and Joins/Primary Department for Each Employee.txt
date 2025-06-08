@@ -1,0 +1,17 @@
+# Write your MySQL query statement below
+Select  employee_id ,department_id 
+From  Employee
+where  primary_flag='Y' OR 
+    employee_id  in ( Select employee_id  
+    From employee
+     Group by employee_id 
+     having count(employee_id) =1
+      );
+    /*نريد استخراج القسم الأساسي لكل موظف.
+
+🔹 في حالة الموظف ينتمي لأكثر من قسم (أي له أكثر من سجل):
+نأخذ فقط السجل الذي فيه primary_flag = 'Y'.
+
+🔹 في حالة الموظف ينتمي لقسم واحد فقط:
+نأخذ هذا القسم الوحيد حتى لو كانت قيمة primary_flag = 'N'.
+*/

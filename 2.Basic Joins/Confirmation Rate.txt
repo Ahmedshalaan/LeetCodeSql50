@@ -1,0 +1,18 @@
+# Write your MySQL query statement below
+Select 
+  s.user_id,
+  /* round (Operation , Length)*/
+  /*Coalesce ,ISNULL ===>> Null Operator*/
+  ROUND(
+    COALESCE(
+      1.0 *
+       SUM(CASE WHEN c.action = 1 THEN 1 ELSE 0 END) / COUNT(c.action),
+      0
+    ), 2
+  )  'confirmation_rate' 
+From 
+  Signups s
+Left  Join 
+  Confirmations c on s.user_id = c.user_id
+Group By 
+  s.user_id;

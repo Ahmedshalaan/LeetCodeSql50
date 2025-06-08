@@ -1,0 +1,4 @@
+# Write you
+Select user_id  ,  name ,mail               
+From Users
+WHERE mail REGEXP '^[a-zA-Z][a-zA-Z0-9_.-]*@leetcode[.]com$';

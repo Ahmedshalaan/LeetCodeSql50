@@ -1,0 +1,7 @@
+/* Write your T-SQL query statement below */
+ 
+Select today.id
+From Weather as yesterday
+join Weather as today
+  On DATEDIFF(DAY, yesterday.recordDate, today.recordDate) = 1
+Where today.temperature > yesterday.temperature;

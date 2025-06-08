@@ -1,0 +1,9 @@
+/* Write your T-SQL query statement below */
+-- delete  p2 
+-- from person p1 
+-- join  person p2 
+-- on p1.email=p2.email and p1.id<p2.id;
+
+with rem as(Select id ,email, row_number()  over (partition by email order by id  ) as row_num
+from person) 
+Delete rem where row_num >1

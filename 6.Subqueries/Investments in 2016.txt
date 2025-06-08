@@ -1,0 +1,8 @@
+/* Write your T-SQL query statement below */
+with Cte As (
+    select pid,tiv_2015,
+    tiv_2016,count(pid)over (partition by tiv_2015)AS tv_cnt,
+    count(pid)over (partition by lat,lon)AS l_cnt
+from insurance
+)
+Select round(sum(tiv_2016),2)AS tiv_2016 from cte where tv_cnt >1 and l_cnt <2

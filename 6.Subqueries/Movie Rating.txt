@@ -1,0 +1,19 @@
+/* Write your T-SQL query statement below */
+/* Write your T-SQL query statement below */
+select results
+from(
+select top 1 name as results
+from MovieRating m inner join users u 
+on u.user_id =m.user_id
+group by  u.user_id,name 
+order by count(*) desc ,[name] asc) a 
+union all
+select results
+from (
+select top 1 title as results
+from MovieRating mr inner join movies m 
+on m.movie_id =mr.movie_id
+WHERE created_at BETWEEN '2020-02-01' AND '2020-02-28'
+group by m.movie_id ,title
+order by avg(rating*1.00) desc ,title asc
+) b

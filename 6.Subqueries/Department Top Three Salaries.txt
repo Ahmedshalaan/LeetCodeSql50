@@ -1,0 +1,14 @@
+/* Write your T-SQL query statement below */
+with Cte  As (
+    select
+        d.name as department,
+        e.name as employee,
+        e.salary as salary,
+        dense_rank() over (partition by d.name order by salary desc) AS rnk
+    from employee e
+    join department d
+    on e.departmentId = d.id
+) 
+select department, employee, salary
+From Cte
+where rnk <= 3;

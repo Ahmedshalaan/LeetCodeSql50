@@ -1,0 +1,13 @@
+Select
+    S.student_id
+    ,S.student_name
+    ,SU.subject_name
+    ,COUNT(E.student_id) attended_exams
+From Students S
+Cross Join Subjects SU 
+Left Join Examinations E    
+   On S.student_id = E.student_id
+    and SU.subject_name = E.subject_name
+Group by S.student_id, S.student_name, SU.subject_name
+Order by S.student_id, S.student_name, SU.subject_name
+;

@@ -1,0 +1,8 @@
+
+select COALESCE((Select num 
+From MyNumbers
+Group by  num
+having COUNT(num) =1
+ORDER BY num DESC
+LIMIT 1),null)
+AS num

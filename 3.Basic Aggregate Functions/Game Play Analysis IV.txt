@@ -1,0 +1,26 @@
+WITH temp AS(
+  SELECT 
+    *, 
+    MIN(event_date) OVER (Partition BY player_id) AS first_login 
+    -- over means that the function before it is a window function 
+  FROM 
+    Activity
+)
+SELECT 
+  ROUND(
+    (
+      SELECT 
+        COUNT(player_id) 
+      FROM 
+        temp 
+      WHERE 
+        DATE_SUB(event_date, INTERVAL 1 DAY) = first_login )
+         / (
+      SELECT 
+        COUNT(DISTINCT player_id) 
+      FROM 
+        Activity
+    ), 
+    2
+  ) AS fraction
+

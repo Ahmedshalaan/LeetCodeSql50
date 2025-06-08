@@ -1,0 +1,4 @@
+/* Write your T-SQL query statement below */
+Select user_id,upper(left(name,1)) +lower(right(name,len(name)-1)) name
+From Users
+order by user_id;

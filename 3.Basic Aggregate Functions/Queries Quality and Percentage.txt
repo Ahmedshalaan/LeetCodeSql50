@@ -1,0 +1,8 @@
+# Write your MySQL query statement below
+#Dog queries====> quality is ((5 / 1) + (5 / 2) + (1 / 200)) / 3 = 2.50
+#Dog queries====> poor_ query_percentage is (1 / 3) * 100 = 33.33
+
+Select query_name ,Round(Avg(rating/position) ,2)as quality ,
+round(100*avg(case when rating<3 then 1 else 0 end) ,2) as poor_query_percentage 
+From Queries
+Group by query_name

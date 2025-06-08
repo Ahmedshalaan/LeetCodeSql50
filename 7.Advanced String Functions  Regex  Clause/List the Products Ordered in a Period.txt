@@ -1,0 +1,24 @@
+-- # Write your MySQL query statement below
+-- Select p.product_name , SUM(o.unit) as unit       
+-- From Products p inner join Orders  o
+-- on p.product_id = o.product_id
+-- WHERE o.order_date LIKE "2020-02-%"
+-- Group by p.product_name 
+-- having Sum(o.unit)>=100
+
+WITH ALL_UNIT AS(
+    SELECT 
+        product_id,
+        order_date,
+        SUM(unit) AS all_unit
+    FROM Orders
+    WHERE order_date BETWEEN '2020-02-01' AND '2020-02-29'
+    GROUP BY product_id
+)
+SELECT 
+    product_name,
+    all_unit AS unit
+FROM Products
+LEFT JOIN ALL_UNIT
+ON Products.product_id = ALL_UNIT.product_id
+WHERE ALL_UNIT.all_unit >= 100 
